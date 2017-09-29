@@ -40,5 +40,35 @@ tac---查看文件命令，从尾巴开始，-n显示行号
 nl---添加行号的查看
 more---查看文件，可以支持翻页
 less---和more一样，但还支持向上翻页
-head---取出前面几行
+head---取出前面几行 
 tail---取出后面几行
+
+head -n 20 filename 取出文件的前20行
+head -n -100 filename 取出文件的前面所有行数，但不包括后面的100行
+tail -n 20 filename 取出文件的尾20行
+tail -n +100 filename 列出100行以后的数据
+head -n 20 /etc/man.config | tail -n 10 列出文件的11行到20行
+od -t c filename 列出非纯文本文件以ASCII字符来输出
+od -t oCc filename 以八进制来列出存储值与ASCII字符的对照表
+touch 修改文件或创建新文件
+Linux文件一共有三个时间：mtime内容更改时的修改时间，ctime状态更改时的修改时间，atime访问时的修改时间
+umask 列出文件默认权限
+umask -S 列出文件默认权限，但是以字符形式列出
+r--4,w--2,x--1,umask的值代表要从umask中减掉的数字
+umask 0022，第一位是特殊权限，后三位就是用户，用户组，其他人的权限
+0代表rwx全，2代表rwx减掉2,等于rx
+chattr设置文件属性
+chattr +i filename 给予i的属性
+chattr -i filename 取消给予i的属性，如果不取消，是没法删除的
+lsattr filename 显示隐藏文件属性
+which filename 查找执行文件
+whereis filename 查找特定文件，locate和find也差不多
+df 列出文件系统的整体磁盘使用量
+du 评估文件系统的磁盘使用量
+df -h 将容量结果以易读的容量格式显示出来
+df -aT 将系统内的所有特殊文件格式及名称都列出来
+df -ih 将目前各个分区当中可用的inode数量列出
+fdisk -l 查看目前系统内的所有分区有哪些
+
+
+
