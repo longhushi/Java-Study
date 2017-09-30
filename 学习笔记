@@ -70,5 +70,39 @@ df -aT 将系统内的所有特殊文件格式及名称都列出来
 df -ih 将目前各个分区当中可用的inode数量列出
 fdisk -l 查看目前系统内的所有分区有哪些
 
+.Z--compress程序压缩的文件，基本已经淘汰
+.gz--gzip程序压缩的文件
+.bz2--bzip2程序压缩的文件
+.tar--tar程序打包的数据，没有经过压缩
+.tar.gz--tar程序打包的文件，其中经过gzip的压缩
+.tar.bz2--tar程序打包的文件，其中经过bzip2的压缩，压缩比最好
+后两种使最广泛，gz和bz2虽然也可以压缩，但只能压缩单个文件，不能打包
+gzip -v filename 压缩文件，并显示出压缩比例
+zcat filename.gz 查看压缩文件中的内容
+gzip -d filename 解压缩文件
+gzip -9 -c filename > filename.gz 压缩比最高的等级压缩，但速度最慢，正常来说6最好，并把压缩的内容重定向到一个文件中，保证源文件和压缩文件共存，
+否则压缩后源文件会消失
+bzip2 -z filename 压缩文件
+bzcat filename.bz2 查看压缩文件中的内容
+bzip2 -d filename.bz2 解压缩文件
+bzip2 -9 -c filename > filename.bz2，采用最佳压缩比压缩文件，并保留原本的文件
+tar -zpcv -f filename 采用gzip方式压缩文件，-f参数后跟的是压缩文件的名字
+tar -jpcv -f filenaem 采用bz2方式压缩文件，压缩比要比gzip好很多
+tar -jtv -f filename 查看压缩包中的文件名
+tar -jxv -f filename.bz2 解压压缩文件，并解压到当前目录下
+tar -jxv -f filename.bz2 -C dirname 解压压缩文件，并解压到指定目录下
+主要参数意义：
+-c 新建打包文件
+-t 查看打包文件内容包括哪些文件名
+-x 解压缩或解打包
+-j 通过bzip2进行
+-z 通过gzip进行
+-v 在压缩/解压过程中，把文件名显示出来
+-f 后面接文件名
+-C 目录，指定要解压缩到的目录
+-p 保留备份数据的原本权限和属性，常用于备份（-c）重要的文件
+-P 保留绝对路径，即允许备份数据中含有根目录存在之意
+--exclude=FILE 在压缩过程中，不要将FILE打包
+
 
 
