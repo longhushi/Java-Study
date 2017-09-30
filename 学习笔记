@@ -11,6 +11,33 @@ Linux基础：
 国庆期间把论文写一个模型出来，并学习机器学习算法（Linux下）
 工作多用linux，把虚拟机插拔USB和远程VPN的问题记着
 
+[Ctrl]+[Alt]+[F1]~[F6]:文字界面登录tty1~tty6终端
+[Ctrl]+[Alt]+[F7]:图形界面桌面
+[Tab]:补全命令
+[Ctrl]-c:强制退出运行的程序
+[Ctrl]-d:代表离开文件界面，相当于exit
+
+man 帮助命令
+info 类似man
+sync 数据同步写入磁盘
+shutdown 关机命令
+shutdown -h 20:25 系统会在今天的20:25关机，若错了会到第二天这个时候
+shutdown -h +10 10分钟后关机
+shutdown -r now 立刻重启
+shutdown -r +30 'info' 30分钟后重启，并显示后面的消息给所有在线的用户
+shutdown -k now 'info' 系统不会关机，仅仅显示警告信息
+
+ls 查看目录 -a 查看隐藏文件 -l 查看详情
+date 显示日期与时间
+echo $LANG 显示目前支持的语言
+LANG=en_US 修改语言成为英文系
+cal 显示日历命令
+cal 默认显示月历
+cal 2009 显示2009年年历
+cal 10 2009 显示2009年10月月历
+bc 简单计算器
+
+
 / 根目录：与开机系统有关
 /usr（UNIX software resource）：与软件安装/执行有关；
 /var（variable）：与系统运作过程有关。
