@@ -131,5 +131,7 @@ tar -jxv -f filename.bz2 -C dirname 解压压缩文件，并解压到指定目�
 -P 保留绝对路径，即允许备份数据中含有根目录存在之意
 --exclude=FILE 在压缩过程中，不要将FILE打包
 
-
+alias 设置别名
+alias lm='ls -al' 
+以后可以直接使用lm来代表ls -al的操作
 
