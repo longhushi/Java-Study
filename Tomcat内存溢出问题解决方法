@@ -1,4 +1,5 @@
 在使用Java程序从数据库中查询大量的数据或是应用服务器(如tomcat、jboss,weblogic)加载jar包时会出现java.lang.OutOfMemoryError异常。这主要是由于应用服务器的内存不足引起的。这种异常常有以下几种情况（以下以tomcat环境为例，其它WEB服务器如jboss,weblogic等是同一个道理）： 
+
 1. java.lang.OutOfMemoryError: PermGen space 
 PermGen space的全称是Permanent Generation space，是指内存的永久保存区域OutOfMemoryError: PermGen space。从文字上看就是内存溢出，解决方法是加大内存。为什么会内存溢出，这是由于这块内存主要是被JVM存放Class和Meta信息的，Class在被Load的时候被放入PermGen space区域，它和存放Instance的Heap区域不同,GC(Garbage Collection)不会在主程序运行期对PermGen space进行清理，所以如果你的APP会LOAD很多CLASS的话，就很可能出现PermGen space错误。这种错误常见在web服务器对JSP进行pre compile的时候。如果你的WEB APP下都用了大量的第三方jar, 其大小超过了jvm默认的大小(4M)那么就会产生此错误信息了。 
 解决方法： 手动设置MaxPermSize大小 
@@ -9,6 +10,7 @@ JAVA_OPTS="-server -XX:PermSize=64M -XX:MaxPermSize=128m
 b.如果tomcat是注册成了windows服务，以services方式启动的，则需要修改注册表中的相应键值。 
 打开注册表，找到目录HKEY_LOCAL_MACHINE\SOFTWARE\Apache Software Foundation\Procrun 2.0\htfty\Parameters\Java，其中目录地址中红色标注的（如htfty）需要根据不同情况作修改，为tomcat服务注册成windows服务的名称。 可以看到JvmMs和JvmMx项，其中JvmMs设置最小的内存使用参数，JvmMx设置最大的内存使用参数。设置好JvmMs和JvmMx项的值，重启tomcat服务器即可生效。 
 建议：将相同的第三方jar文件移置到tomcat/shared/lib目录下，这样可以达到减少jar 文档重复占用内存的目的。 
+
 2. java.lang.OutOfMemoryError: Java heap space 
 JVM堆的设置是指java程序运行过程中JVM可以调配使用的内存空间的设置。JVM在启动的时候会自动设置Heap size的值，其初始空间(即-Xms)是物理内存的1/64，最大空间(-Xmx)是物理内存的1/4。可以利用JVM提供的-Xmn -Xms -Xmx等选项可进行设置。Heap size 的大小是Young Generation 和Tenured Generaion 之和。在JVM中如果98％的时间是用于GC且可用的Heap size 不足2％的时候将抛出此异常信息。 
 解决方法：手动设置Heap size 
