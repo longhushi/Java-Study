@@ -1,0 +1,12 @@
+例如：有表1，表2两张相，希望通过like进行关联查询
+// mysql中使用concat连接字符串
+select  t1.id, t1.title, t2.keyword from t1 inner join t2 on t1.title like concat('%', t2.keyword, '%'); 
+
+// oracle、postgres 使用||连接字符串，其它库使用字符串连方式连接即可
+select  t1.id, t1.title, t2.keyword from t1 inner join t2 on t1.title like '%' || t2.keyword || '%';
+
+其它思路：exists(是否存在)、regexp(正则)、instr(字符串包含)
+select distinct t1.title from t1 , t2 where instr(t1.title,t2.keyword);
+select distinct t1.title from t1 inner join  t2 on t1.title regexp t2.keyword;
+select * from t1 where exists (select keyword from t2 where t1.title regexp keyword);
+select * from t1 where exists (select keyword from t2 where t1.title like concat('%',keyword,'%'));
